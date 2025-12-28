@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://k26wrp5iwx5w"]
+
+[ext_resource type="Script" uid="uid://dt7q3bbn66w8f" path="res://Library/VisualEffects/FadeSprite.gd" id="1_irekj"]
+
+[node name="FadeSprite" type="Sprite2D"]
+script = ExtResource("1_irekj")
+metadata/_custom_type_script = "uid://dt7q3bbn66w8f"
