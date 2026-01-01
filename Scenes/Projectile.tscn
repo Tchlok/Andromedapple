@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://hfja8tg0onrs"]
+
+[ext_resource type="Script" uid="uid://p3ouf06w16n5" path="res://Scripts/Projectile.gd" id="1_k1cl8"]
+[ext_resource type="Texture2D" uid="uid://danx6j83bau84" path="res://Sprites/Tex_FruitTest.png" id="1_lal66"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k1cl8"]
+radius = 60.827625
+
+[node name="Projectile" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_k1cl8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lal66")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k1cl8")

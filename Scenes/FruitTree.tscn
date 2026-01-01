@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bj1gbp4tnts84"]
+
+[ext_resource type="Script" uid="uid://dgson5vl2s750" path="res://Scripts/FruitTree.gd" id="1_pl817"]
+[ext_resource type="Texture2D" uid="uid://5kl0dp8r4hdi" path="res://Sprites/Tex_TreeTest.png" id="2_ibw46"]
+[ext_resource type="PackedScene" uid="uid://dol66ko3q7a5x" path="res://Scenes/Fruit.tscn" id="2_ym3g0"]
+[ext_resource type="Script" uid="uid://2jrrh6gpg23n" path="res://TAOFUS/VisualEffects/SmoothToggle.gd" id="3_4ff7j"]
+
+[node name="FruitTree" type="Node2D" node_paths=PackedStringArray("spawnPoints", "tog")]
+script = ExtResource("1_pl817")
+packedFruit = ExtResource("2_ym3g0")
+spawnPoints = NodePath("FruitSpawns")
+tog = NodePath("SmoothToggle")
+
+[node name="FruitSpawns" type="Node2D" parent="."]
+
+[node name="Node2D" type="Node2D" parent="FruitSpawns"]
+position = Vector2(-7, -266)
+
+[node name="Node2D2" type="Node2D" parent="FruitSpawns"]
+position = Vector2(-99, -153)
+
+[node name="Node2D3" type="Node2D" parent="FruitSpawns"]
+position = Vector2(91, -146)
+
+[node name="SmoothToggle" type="Node2D" parent="."]
+script = ExtResource("3_4ff7j")
+speedIn = 10.0
+_easeIn = 1
+metadata/_custom_type_script = "uid://2jrrh6gpg23n"
+
+[node name="Sprite2D" type="Sprite2D" parent="SmoothToggle"]
+position = Vector2(4, -149)
+texture = ExtResource("2_ibw46")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cadkk3oc7vvwk"]
+
+[ext_resource type="Script" uid="uid://cwxnw3iosaxy1" path="res://Scripts/Planet.gd" id="1_0f6oh"]
+[ext_resource type="Texture2D" uid="uid://byu214msskmll" path="res://icon.svg" id="2_48hbc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
+size = Vector2(12, 12)
+
+[node name="PlanetTest" type="StaticBody2D"]
+script = ExtResource("1_0f6oh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(12.329277, 12.329277)
+shape = SubResource("RectangleShape2D_kln2b")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.9135902, 1.9135902)
+texture = ExtResource("2_48hbc")

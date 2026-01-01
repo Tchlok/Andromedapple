@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dol66ko3q7a5x"]
+
+[ext_resource type="Script" uid="uid://d0vodvo3gg3" path="res://Scripts/Fruit.gd" id="1_hkvwh"]
+[ext_resource type="Texture2D" uid="uid://danx6j83bau84" path="res://Sprites/Tex_FruitTest.png" id="2_jhvyw"]
+
+[node name="Fruit" type="Node2D" node_paths=PackedStringArray("sp", "control", "testSelectedBackdrop")]
+z_index = 10
+script = ExtResource("1_hkvwh")
+sp = NodePath("Sprite2D")
+control = NodePath("Control")
+testSelectedBackdrop = NodePath("Sprite2D/Backdrop")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.7289331, 0.7289331)
+texture = ExtResource("2_jhvyw")
+
+[node name="Backdrop" type="Sprite2D" parent="Sprite2D"]
+modulate = Color(0, 0, 0, 0.5176471)
+z_index = -1
+scale = Vector2(1.6034586, 1.6034586)
+texture = ExtResource("2_jhvyw")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -63.0
+offset_top = -64.0
+offset_right = 61.0
+offset_bottom = 63.0

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0tf80qo3vqi3"]
+
+[ext_resource type="Script" uid="uid://br5ab08qlugmk" path="res://Scripts/AimVisuals.gd" id="1_6vq4j"]
+
+[node name="AimVisuals" type="Node2D" node_paths=PackedStringArray("line")]
+script = ExtResource("1_6vq4j")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)

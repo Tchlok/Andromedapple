@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://b44qd16p07vcq"]
+
+[ext_resource type="Script" uid="uid://dijj1sm15hano" path="res://Scripts/Game.gd" id="1_r150o"]
+[ext_resource type="PackedScene" uid="uid://bj1gbp4tnts84" path="res://Scenes/FruitTree.tscn" id="2_pbw6q"]
+[ext_resource type="Script" uid="uid://8g2tl3m03h2e" path="res://Scripts/Level.gd" id="2_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://c0tf80qo3vqi3" path="res://Scenes/AimVisuals.tscn" id="3_jw32o"]
+[ext_resource type="PackedScene" uid="uid://cadkk3oc7vvwk" path="res://Scenes/planet_test.tscn" id="4_rgh2o"]
+[ext_resource type="Script" uid="uid://byrg0b4kv8toj" path="res://Scripts/Cam.gd" id="5_pbw6q"]
+[ext_resource type="Script" uid="uid://cs6vvgwd0e0ot" path="res://Scripts/TestLog.gd" id="6_v1gob"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("level", "cam")]
+position = Vector2(3, -10)
+script = ExtResource("1_r150o")
+level = NodePath("../Level")
+cam = NodePath("../Cam")
+packedTree = ExtResource("2_pbw6q")
+stateReturnThreshold = 0.2
+aimDistanceLimit = 500.0
+aimBaseSpeedLimit = 1000.0
+packedAimVisuals = ExtResource("3_jw32o")
+
+[node name="Level" type="Node2D" parent="." node_paths=PackedStringArray("testLog", "game", "holderPlanet", "holderProjectile")]
+script = ExtResource("2_rgh2o")
+testLog = NodePath("../Cam/Camera2D/TestLog")
+game = NodePath("../Game")
+holderPlanet = NodePath("HolderPlanet")
+holderProjectile = NodePath("HolderProjectile")
+
+[node name="HolderPlanet" type="Node2D" parent="Level"]
+
+[node name="PlanetTest" parent="Level/HolderPlanet" instance=ExtResource("4_rgh2o")]
+
+[node name="HolderFruitTree" type="Node2D" parent="Level"]
+
+[node name="HolderFruit" type="Node2D" parent="Level"]
+
+[node name="HolderProjectile" type="Node2D" parent="Level"]
+
+[node name="Cam" type="Node2D" parent="." node_paths=PackedStringArray("game", "level", "camera")]
+script = ExtResource("5_pbw6q")
+game = NodePath("../Game")
+level = NodePath("../Level")
+camera = NodePath("Camera2D")
+stepZoom = 0.15
+minZoom = 0.2
+maxZoom = 1.6
+defaultZoom = 0.5
+speedZoom = 8.0
+speedMove = 8.0
+
+[node name="Camera2D" type="Camera2D" parent="Cam"]
+
+[node name="TestLog" type="Node2D" parent="Cam/Camera2D" node_paths=PackedStringArray("cam", "label")]
+script = ExtResource("6_v1gob")
+cam = NodePath("..")
+label = NodePath("RichTextLabel")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Cam/Camera2D/TestLog"]
+z_index = 4000
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 498.0
+offset_bottom = 498.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 40
