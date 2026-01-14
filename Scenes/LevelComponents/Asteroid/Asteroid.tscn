@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bl6s2d2ov8no3"]
+
+[ext_resource type="Script" uid="uid://b85x3hknxj3do" path="res://Scripts/Asteroid.gd" id="1_ppm8i"]
+[ext_resource type="Texture2D" uid="uid://nynnchoyd3ov" path="res://Sprites/Tex_Asteroid.png" id="2_3lcxl"]
+[ext_resource type="Script" uid="uid://3uow3ihp353v" path="res://TAOFUS/VisualEffects/Shaker.gd" id="2_hesds"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hesds"]
+resource_local_to_scene = true
+radius = 87.14356
+
+[node name="Asteroid" type="Area2D"]
+script = ExtResource("1_ppm8i")
+metadata/_custom_type_script = "uid://b85x3hknxj3do"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hesds")
+
+[node name="Shaker" type="Node2D" parent="."]
+script = ExtResource("2_hesds")
+metadata/_custom_type_script = "uid://3uow3ihp353v"
+
+[node name="Sprite2D" type="Sprite2D" parent="Shaker"]
+texture = ExtResource("2_3lcxl")

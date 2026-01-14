@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cadkk3oc7vvwk"]
+
+[ext_resource type="Script" uid="uid://cwxnw3iosaxy1" path="res://Scripts/Planet.gd" id="1_pcoqr"]
+[ext_resource type="Texture2D" uid="uid://bsh3a8uh2s6xp" path="res://Sprites/Tex_PlanetTest.png" id="2_dtgdw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pcoqr"]
+resource_local_to_scene = true
+radius = 100.0
+
+[node name="Planet" type="Area2D"]
+script = ExtResource("1_pcoqr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pcoqr")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_dtgdw")

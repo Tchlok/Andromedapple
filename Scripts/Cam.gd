@@ -61,6 +61,8 @@ func stepZoomOut():
 	setZoomT(_zoomT-stepZoom)
 func fullZoomIn():
 	setZoomT(maxZoom)
+func fullZoomOut():
+	setZoomT(minZoom)
 
 
 func executePanMovement():

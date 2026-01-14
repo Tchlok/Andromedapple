@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcyxih26cjcrh"]
+
+[ext_resource type="PackedScene" uid="uid://cadkk3oc7vvwk" path="res://Scenes/LevelComponents/Planet.tscn" id="1_brkd6"]
+[ext_resource type="PackedScene" uid="uid://bl6s2d2ov8no3" path="res://Scenes/LevelComponents/Asteroid/Asteroid.tscn" id="2_ebpqd"]
+[ext_resource type="PackedScene" uid="uid://bcsujg1vnnwgj" path="res://Scenes/LevelComponents/Debree/DebreeRect.tscn" id="3_1cbvw"]
+
+[node name="Layout4" type="Node2D"]
+
+[node name="Planet2" parent="." instance=ExtResource("1_brkd6")]
+position = Vector2(-6309.9995, 2727)
+scale = Vector2(1.94, 1.94)
+
+[node name="Planet3" parent="." instance=ExtResource("1_brkd6")]
+position = Vector2(-6818.0005, -1344)
+scale = Vector2(2.6, 2.6)
+
+[node name="Planet5" parent="." instance=ExtResource("1_brkd6")]
+position = Vector2(-1450.0001, 2955)
+scale = Vector2(4, 4)
+
+[node name="Planet4" parent="." instance=ExtResource("1_brkd6")]
+position = Vector2(3837, -79)
+scale = Vector2(3.205, 3.205)
+
+[node name="Planet" parent="." instance=ExtResource("1_brkd6")]
+position = Vector2(-2360, -1824)
+scale = Vector2(2.645, 2.645)
+
+[node name="Asteroid" parent="." instance=ExtResource("2_ebpqd")]
+scale = Vector2(4, 4)
+
+[node name="Asteroid2" parent="." instance=ExtResource("2_ebpqd")]
+position = Vector2(-4545, -1163.0001)
+scale = Vector2(1.91, 1.91)
+
+[node name="Debree" parent="." instance=ExtResource("3_1cbvw")]
+position = Vector2(-4143, -2170)
+scale = Vector2(2.770528, 5.877065)
+
+[node name="Debree3" parent="." instance=ExtResource("3_1cbvw")]
+position = Vector2(-2019, -2922.0002)
+rotation = 1.5707964
+scale = Vector2(3.1397042, 21.737669)
+
+[node name="Debree2" parent="." instance=ExtResource("3_1cbvw")]
+position = Vector2(-2464, 285)
+rotation = 1.5707964
+scale = Vector2(2.771, 8.982)
+
+[node name="Debree4" parent="." instance=ExtResource("3_1cbvw")]
+position = Vector2(2606.0002, 987.00006)
+rotation = 1.5707964
+scale = Vector2(2.0116107, 7.1444125)
+
+[node name="Asteroid3" parent="." instance=ExtResource("2_ebpqd")]
+position = Vector2(846, -1803)
+scale = Vector2(1.5, 1.5)
+
+[node name="Asteroid4" parent="." instance=ExtResource("2_ebpqd")]
+position = Vector2(3409, 2253)
+scale = Vector2(2.925, 2.925)

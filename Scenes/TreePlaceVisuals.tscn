@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://hgygvb26b55n"]
+
+[ext_resource type="Texture2D" uid="uid://danx6j83bau84" path="res://Sprites/Tex_FruitTest.png" id="1_87ow7"]
+[ext_resource type="Script" uid="uid://baejif4gv3sti" path="res://Scripts/TreePlaceVisuals.gd" id="1_k5cxf"]
+
+[node name="TreePlaceVisuals" type="Node2D" node_paths=PackedStringArray("point")]
+script = ExtResource("1_k5cxf")
+point = NodePath("Point")
+
+[node name="Point" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Point"]
+position = Vector2(41, -1)
+rotation = -3.1415927
+texture = ExtResource("1_87ow7")

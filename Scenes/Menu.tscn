@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=3 uid="uid://cew01kmmnyve5"]
+
+[ext_resource type="Script" uid="uid://c2o5r133q1hpu" path="res://Scripts/Menu.gd" id="1_3kf3n"]
+[ext_resource type="PackedScene" uid="uid://cjwjjy82y1o6t" path="res://Scenes/Layout/layout3.tscn" id="2_s2c3o"]
+[ext_resource type="PackedScene" uid="uid://xrng5jub4pqh" path="res://Scenes/Layout/layout1.tscn" id="4_ma218"]
+[ext_resource type="PackedScene" uid="uid://bqt4bnak1eaul" path="res://Scenes/Layout/layout2.tscn" id="5_idohh"]
+[ext_resource type="PackedScene" uid="uid://dcyxih26cjcrh" path="res://Scenes/Layout/layout4.tscn" id="5_wfhf6"]
+[ext_resource type="PackedScene" uid="uid://gv70gjvlkr3" path="res://Scenes/Layout/layout5.tscn" id="6_3jcrr"]
+
+[node name="Menu" type="Node2D" node_paths=PackedStringArray("testLabel")]
+script = ExtResource("1_3kf3n")
+testLabel = NodePath("RichTextLabel")
+testLevels = Array[PackedScene]([ExtResource("4_ma218"), ExtResource("5_idohh"), ExtResource("2_s2c3o"), ExtResource("5_wfhf6"), ExtResource("6_3jcrr")])
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -489.0
+offset_top = -34.0
+offset_right = 485.0
+offset_bottom = 173.0
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center]1"
+
+[node name="Camera2D" type="Camera2D" parent="."]

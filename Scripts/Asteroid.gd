@@ -1,34 +1,25 @@
-class_name Planet
+class_name Asteroid
 extends Area2D
 
-var level : Level
-const density : float = 300
+@export var density : float = 300
 var radius : float
-var mass : float
 var grav : GravitySource
-var tree : FruitTree
+var level : Level
+var mass : float
+var shaker : Shaker
 var sp : Sprite2D
 var shape : CircleShape2D
-func isOccupied():
-	return tree!=null
-
-func treeOccupiedSetup(_tree : FruitTree):
-	tree=_tree
-	level.occupiedPlanets+=1
-	sp.modulate=Color(0,1,0,1)
-
 func _enter_tree():
 	var colShape : CollisionShape2D = get_child(0)
 	shape=colShape.shape
-	sp=get_child(1)
+	shaker=get_child(1)
+	sp=shaker.get_child(0)
+	collision_layer=4
+	collision_mask=0
 
 func _ready():
-	sp.modulate=Color(1,0.5,0.5,1)
 	setRadius(scale.x*100)
 	scale=Vector2.ONE
-
-func _physics_process(delta):
-	pass
 
 
 func setRadius(_radius):
@@ -36,5 +27,8 @@ func setRadius(_radius):
 	mass=density*pow(radius,2)
 	if grav==null:
 		grav=level.spawnGravitySource(self,Vector2.ZERO,mass,true)
-	sp.scale=Vector2.ONE*0.4*(radius/100)
+	sp.scale=Vector2.ONE*(radius/100)
 	shape.radius=radius
+
+func hitByProj(proj : Projectile):
+	shaker.Trigger()

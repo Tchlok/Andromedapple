@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc8c8ldwg2tv5"]
+
+[ext_resource type="Script" uid="uid://dri6xvyl76ldr" path="res://Scripts/GravitySource.gd" id="1_ij20m"]
+[ext_resource type="Script" uid="uid://cskx3cnrbphx1" path="res://TAOFUS/VisualEffects/DrawCircle.gd" id="2_sxdvd"]
+
+[node name="GravitySource" type="Node2D" node_paths=PackedStringArray("circ")]
+script = ExtResource("1_ij20m")
+circ = NodePath("DrawCircle")
+
+[node name="DrawCircle" type="Line2D" parent="."]
+script = ExtResource("2_sxdvd")
+metadata/_custom_type_script = "uid://cskx3cnrbphx1"
