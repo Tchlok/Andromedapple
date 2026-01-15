@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://2jrrh6gpg23n" path="res://TAOFUS/VisualEffects/SmoothToggle.gd" id="3_4ff7j"]
 
 [node name="FruitTree" type="Node2D" node_paths=PackedStringArray("spawnPoints", "tog")]
+z_index = -10
 script = ExtResource("1_pl817")
 cameraHeight = 250.0
 packedFruit = ExtResource("2_ym3g0")

@@ -7,7 +7,7 @@ var level : Level
 var ignoredOrigin : GravitySource
 
 var initialDirection : Vector2
-var initialSpeed : float
+@export var initialSpeed : float
 
 var gravitySources : Array[GravitySource]
 var prevGravitySources : Array[GravitySource]
@@ -19,10 +19,7 @@ var _freezeT : float
 @export var area : Area2D
 @export var areaColShape : CollisionShape2D
 
-@export var initialSpeedMin : float
-@export var initialSpeedMax : float
 
-const exitBoost : float = 100
 
 func _enter_tree():
 	areaColShape.shape=colShape.shape
@@ -45,10 +42,9 @@ func onAreaEntered(other : Area2D):
 		var asteroid : Asteroid = other
 		asteroid.hitByProj(self)
 		level.removeProjectile(self,true,other)
-func setup(_initialDirection : Vector2, _p : float, _ignoredOrigin : GravitySource):
+func setup(_initialDirection : Vector2, _ignoredOrigin : GravitySource):
 	ignoredOrigin=_ignoredOrigin
 	initialDirection=_initialDirection
-	initialSpeed=lerp(initialSpeedMin,initialSpeedMax,_p)
 	linear_velocity=initialDirection*initialSpeed
 
 var totalGravStep : Vector2

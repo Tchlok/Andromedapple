@@ -2,13 +2,10 @@ class_name Fruit
 extends Node2D
 
 @export var sp : Sprite2D
-@export var control : Control
 @export var testSelectedBackdrop : Sprite2D
 
 func _enter_tree():
     setFruitState(FruitState.Normal)
-    control.mouse_entered.connect(onFocusEntered)
-    control.mouse_exited.connect(onFocusExit)
 
 #TODO not sure if this is needed
 func setup():

@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://cskx3cnrbphx1" path="res://TAOFUS/VisualEffects/DrawCircle.gd" id="2_sxdvd"]
 
 [node name="GravitySource" type="Node2D" node_paths=PackedStringArray("circ")]
+z_index = -200
+z_as_relative = false
 script = ExtResource("1_ij20m")
 circ = NodePath("DrawCircle")
 

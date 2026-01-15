@@ -76,14 +76,14 @@ func spawnFruit(fruitPacked : PackedScene, tree : FruitTree, position : Vector2)
 	return fruit
 
 
-func spawnProjectile(fruit : Fruit, position : Vector2, direction : Vector2, chargeP : float):
+func spawnProjectile(fruit : Fruit, position : Vector2, direction : Vector2):
 	var packedProj : PackedScene = load(packedProjectilePath)
 	var projectile : Projectile = packedProj.instantiate()
 	projectile.level=self
 	projectiles.append(projectile)
 	projectile.position=position
 	holderProjectile.add_child(projectile)
-	projectile.setup(direction,chargeP, planetOfFruit(fruit).grav)
+	projectile.setup(direction, planetOfFruit(fruit).grav)
 
 	var packedTrail : PackedScene = load(packedProjectilePathPath)
 	var trail : ProjectileTrail = packedTrail.instantiate()
@@ -124,11 +124,6 @@ func _physics_process(delta: float):
 	for proj in projectiles:
 		for grav in gravitySources:
 			proj.gravStep(grav.affect(proj.global_position,delta,proj),delta, grav)
-
-
-func fruitMouseEvents(getsEvents:bool):
-	for f in fruits:
-		f.control.mouse_filter=Control.MouseFilter.MOUSE_FILTER_STOP if getsEvents else Control.MouseFilter.MOUSE_FILTER_IGNORE
 
 func planetOfTree(tree : FruitTree):
 	var p : Planet = tree.get_parent()

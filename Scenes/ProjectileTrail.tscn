@@ -8,3 +8,6 @@ width = 20.0
 default_color = Color(0.66831046, 0.0003360489, 0.6687019, 1)
 script = ExtResource("1_qai5d")
 timeBetweenPoints = 0.02
+maxOpacity = 0.8
+minOpacity = 0.2
+opacityLossStep = 0.3

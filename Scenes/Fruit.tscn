@@ -16,7 +16,8 @@ texture = ExtResource("2_jhvyw")
 
 [node name="Backdrop" type="Sprite2D" parent="Sprite2D"]
 modulate = Color(0, 0, 0, 0.5176471)
-z_index = -1
+z_index = -5
+z_as_relative = false
 scale = Vector2(1.6034586, 1.6034586)
 texture = ExtResource("2_jhvyw")
 

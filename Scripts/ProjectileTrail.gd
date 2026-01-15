@@ -6,14 +6,24 @@ var projectile : Projectile
 var p : Array[Vector2]
 
 @export var timeBetweenPoints : float
+
+@export var maxOpacity : float
+@export var minOpacity : float
+@export var opacityLossStep : float
+
 var curPointCd : float
 
 func _enter_tree():
 	level.EV_ProjectileSpawned.connect(onProjectileSpawned)
 	level.EV_ProjectileRemoved.connect(onProjectileRemoved)
+	z_index=-400
+	modulate.a=maxOpacity
 
 func onProjectileSpawned(_projectile : Projectile):
-	pass
+	if projectile==_projectile:
+		return
+	modulate.a=max(modulate.a-opacityLossStep,minOpacity)
+	z_index-=1
 
 func onProjectileRemoved(_projectile : Projectile, _destroyed : bool, _other : Node2D):
 	if projectile==_projectile:

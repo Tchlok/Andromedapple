@@ -8,6 +8,7 @@ resource_local_to_scene = true
 radius = 100.0
 
 [node name="Planet" type="Area2D"]
+z_as_relative = false
 script = ExtResource("1_pcoqr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cskx3cnrbphx1" path="res://TAOFUS/VisualEffects/DrawCircle.gd" id="1_e5byv"]
 
 [node name="OrbitCircle" type="Line2D"]
+z_index = -300
+z_as_relative = false
 default_color = Color(1, 1, 1, 0.43529412)
 script = ExtResource("1_e5byv")
 metadata/_custom_type_script = "uid://cskx3cnrbphx1"
