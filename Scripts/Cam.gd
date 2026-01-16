@@ -11,18 +11,22 @@ var _zoomT : float
 @export var maxZoom : float
 @export var defaultZoom : float
 @export var speedZoom : float
-
+@export var zoomPow : float
 
 @export var speedMove : float
 
 func _ready():
 	setZoomT(defaultZoom, true)
+	fullZoomIn()
+	stepZoomOut()
+	stepZoomOut()
+	stepZoomOut()
 
 func setZoomT(newT : float, instant : bool = false):
 	newT=MathS.Clamp01(newT)
 	_zoomT=newT
 	if instant:
-		camera.zoom=Vector2.ONE*lerp(minZoom,maxZoom,pow(_zoomT,1.5))
+		camera.zoom=Vector2.ONE*lerp(minZoom,maxZoom,pow(_zoomT,zoomPow))
 
 var targetPosition : Vector2
 var mousePosPrev : Vector2
@@ -30,11 +34,11 @@ var mouseDelta : Vector2
 func _process(delta):
 	mouseDelta=mousePosPrev-get_local_mouse_position()
 	
-	var target=lerp(minZoom,maxZoom,pow(_zoomT,1.5))
+	var target=lerp(minZoom,maxZoom,pow(_zoomT,zoomPow))
 
 	if camera.zoom.x!=target:
 		camera.zoom.x+=(target-camera.zoom.x)*delta*speedZoom
-		if abs(camera.zoom.x-target)<0.005:
+		if abs(camera.zoom.x-target)<0.002:
 			camera.zoom.x=target
 		camera.zoom.y=camera.zoom.x
 

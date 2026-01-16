@@ -12,8 +12,6 @@ func _ready():
 
 var level : Level
 
-func setup(_level : Level):
-	level=_level
 
 func onToggleEnd(tog, on):
 	for sp : Node2D in spawnPoints.get_children():

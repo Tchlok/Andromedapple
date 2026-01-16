@@ -57,11 +57,11 @@ func spawnTree(treePacked : PackedScene, planet : Planet, position : Vector2, ro
 	if planet.isOccupied():
 		return
 	var tree : FruitTree = treePacked.instantiate()
+	tree.level=self
 	tree.position=position
 	tree.rotation_degrees=rotation
 	trees.append(tree)
 	planet.add_child(tree)
-	tree.setup(self)
 	planet.treeOccupiedSetup(tree)
 	EV_TreeSpawned.emit(tree)
 	return tree

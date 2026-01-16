@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxlscnfmux7n0"]
+
+[ext_resource type="Script" uid="uid://ck7six7g34r3a" path="res://Scripts/InputGuide.gd" id="1_rawxc"]
+
+[node name="InputGuide" type="Node2D" node_paths=PackedStringArray("label")]
+script = ExtResource("1_rawxc")
+label = NodePath("RichTextLabel")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -400.0
+offset_right = 400.0
+theme_override_font_sizes/normal_font_size = 65
+bbcode_enabled = true
+fit_content = true

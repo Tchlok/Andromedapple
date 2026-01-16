@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b44qd16p07vcq"]
+[gd_scene load_steps=10 format=3 uid="uid://b44qd16p07vcq"]
 
 [ext_resource type="Script" uid="uid://dijj1sm15hano" path="res://Scripts/Game.gd" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://bj1gbp4tnts84" path="res://Scenes/FruitTree.tscn" id="2_pbw6q"]
@@ -7,10 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://hgygvb26b55n" path="res://Scenes/TreePlaceVisuals.tscn" id="4_50glp"]
 [ext_resource type="Script" uid="uid://byrg0b4kv8toj" path="res://Scripts/Cam.gd" id="5_pbw6q"]
 [ext_resource type="Script" uid="uid://cs6vvgwd0e0ot" path="res://Scripts/TestLog.gd" id="6_v1gob"]
+[ext_resource type="PackedScene" uid="uid://cxlscnfmux7n0" path="res://Scenes/InputGuide.tscn" id="7_vy5pj"]
+[ext_resource type="Script" uid="uid://bia7cibytvky8" path="res://Scripts/GameUi.gd" id="8_50glp"]
 
 [node name="Main" type="Node2D"]
 
-[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("level", "cam")]
+[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("level", "cam", "gameUi")]
 position = Vector2(3, -10)
 script = ExtResource("1_r150o")
 level = NodePath("../Level")
@@ -20,6 +22,7 @@ stateReturnThreshold = 0.2
 aimDistanceLimit = 1500.0
 packedAimVisuals = ExtResource("3_jw32o")
 packedTreePlaceVisuals = ExtResource("4_50glp")
+gameUi = NodePath("../Level/GameUi")
 
 [node name="Level" type="Node2D" parent="." node_paths=PackedStringArray("testLog", "game", "holderProjectile")]
 script = ExtResource("2_rgh2o")
@@ -33,16 +36,41 @@ holderProjectile = NodePath("HolderProjectile")
 
 [node name="HolderProjectile" type="Node2D" parent="Level"]
 
+[node name="GameUi" type="Control" parent="Level" node_paths=PackedStringArray("cam", "testLog", "inputGuideLeft", "inputGuideRight")]
+z_index = 200
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_50glp")
+cam = NodePath("../../Cam")
+testLog = NodePath("../../Cam/Camera2D/TestLog")
+zoomSpringDamp = 0.8
+zoomSpringRigidity = 5.0
+posSpringDamp = 0.3
+posSpringRigidity = 6.0
+inputGuideLeft = NodePath("InputGuideLeft")
+inputGuideRight = NodePath("InputGuideRight")
+
+[node name="InputGuideLeft" parent="Level/GameUi" instance=ExtResource("7_vy5pj")]
+position = Vector2(-560, 394)
+
+[node name="InputGuideRight" parent="Level/GameUi" instance=ExtResource("7_vy5pj")]
+position = Vector2(560, 394)
+
 [node name="Cam" type="Node2D" parent="." node_paths=PackedStringArray("game", "level", "camera")]
 script = ExtResource("5_pbw6q")
 game = NodePath("../Game")
 level = NodePath("../Level")
 camera = NodePath("Camera2D")
-stepZoom = 0.15
+stepZoom = 0.125
 minZoom = 0.1
 maxZoom = 1.6
 defaultZoom = 0.5
-speedZoom = 8.0
+speedZoom = 20.0
+zoomPow = 2.0
 speedMove = 8.0
 
 [node name="Camera2D" type="Camera2D" parent="Cam"]

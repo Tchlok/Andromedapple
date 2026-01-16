@@ -1,6 +1,7 @@
 class_name Game
 extends Node2D
 
+
 @export var level : Level
 @export var cam : Cam
 
@@ -34,6 +35,7 @@ var treePlaceVisualsInstance : TreePlaceVisuals
 var mainHeldTime : float
 var secondaryHeldTime : float
 
+@export var gameUi : GameUi
 
 func _enter_tree():
 	level.EV_LevelSetup.connect(onLevelSetup)
@@ -56,7 +58,9 @@ func _physics_process(delta: float):
 			pass
 
 func _process(delta: float):
-
+	level.testLog.display("GameState",gameState)
+	level.testLog.display("SubState",subStateIndex)
+	
 	var  targetTimeScale=1.0
 	if gameState!=GameState.GameOver:
 		if Input.is_action_pressed("Fast") and not TransitionManager.IsTransitioning():
@@ -65,13 +69,6 @@ func _process(delta: float):
 			Persistent.TransitionGame()
 	Engine.time_scale=targetTimeScale
 	Engine.physics_ticks_per_second=ceili(60*targetTimeScale)
-
-	level.testLog.display("GameState",gameState)
-	level.testLog.display("SubState",subStateIndex)
-	level.testLog.display("CamOffset",cam.targetPosition)
-	level.testLog.display("Occupy",level.getOccupationP())
-
-
 	_stateT+=delta
 	var scrollZoomBlocked=false
 	match gameState:
@@ -79,7 +76,8 @@ func _process(delta: float):
 			if Input.is_action_just_pressed("FruitSelect"):
 				cycleSelectedFruit()
 			if Input.is_action_just_pressed("Main"):
-				setGameState(GameState.Aim)
+				if level.fruitsOfTree(selectedTree).size()!=0:
+					setGameState(GameState.Aim)
 			elif Input.is_action_just_released("Secondary"):
 				if secondaryHeldTime<stateReturnThreshold:
 					if cam.relativeTo==null:
@@ -90,13 +88,20 @@ func _process(delta: float):
 						cam.moveRelativeTo(null)
 			elif Input.is_action_pressed("Secondary"):
 				cam.executePanMovement()
+			
+			var messageRight : String = ""
+			if cam.relativeTo==null:
+				messageRight+="TAP: FOLLOW PLANET"
+			else:
+				messageRight+="TAP: END FOLLOW"
+			messageRight+="\nHOLD: PAN CAMERA"
+			gameUi.updateInputText("AIM FRUIT",messageRight)
 		GameState.Aim:
 			if Input.is_action_just_pressed("FruitSelect"):
 				cycleSelectedFruit()
 			aimVec = (get_global_mouse_position()-selectedFruit.global_position)
 			aimDir=aimVec.normalized()
 			aimVisualsInstance.update(aimVec)
-
 			if Input.is_action_pressed("Secondary"):
 				cam.executePanMovement()
 			else:
@@ -107,12 +112,15 @@ func _process(delta: float):
 			elif Input.is_action_just_pressed("Main"):
 				level.spawnProjectile(selectedFruit, selectedFruit.global_position,aimDir)
 			
+			gameUi.updateInputText("SHOOT!","TAP: VIEW MAP\nHOLD: PAN CAMERA")
 		GameState.Track:
 			if subStateIndex==0: #flying
 				level.testLog.display("ProjVel", int(selectedProjectile.linear_velocity.length()))
 				if Input.is_action_just_released("Secondary"):
 					if secondaryHeldTime<stateReturnThreshold:
 						level.removeProjectile(selectedProjectile,true)
+				
+				gameUi.updateInputText("", "DISCARD")
 			else: #planting
 				var dir : Vector2 = selectedPlanet.global_position.direction_to(get_global_mouse_position())
 				treePlaceVisualsInstance.update(dir,selectedPlanet.radius)
@@ -132,13 +140,14 @@ func _process(delta: float):
 							setGameState(GameState.View)
 						else:
 							print("can't discard")
-							
+				gameUi.updateInputText("PLANT TREE", "DISCARD")
 		GameState.GameOver:
 			if not TransitionManager.IsTransitioning() and _stateT > 0.5:
 				if Input.is_action_just_pressed("Main"):
 					Persistent.TransitionMenu()
 				elif Input.is_action_just_pressed("Secondary"):
 					Persistent.TransitionGame()
+			gameUi.updateInputText("TO MENU", "TRY AGAIN")
 	
 	if not scrollZoomBlocked:
 		if Input.is_action_just_pressed("ZoomIn"):
@@ -254,6 +263,8 @@ func cycleSelectedFruit():
 		return
 	var indexOfFruit : int = 0
 	var fruitsOnTree : Array[Fruit] = level.fruitsOfTree(selectedTree)
+	if fruitsOnTree.size()==0:
+		return
 	if selectedFruit!=null:
 		for i in range(fruitsOnTree.size()):
 			if fruitsOnTree[i]==selectedFruit:
