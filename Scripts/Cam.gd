@@ -16,12 +16,10 @@ var _zoomT : float
 @export var speedMove : float
 
 func _ready():
-	setZoomT(defaultZoom, true)
-	fullZoomIn()
-	stepZoomOut()
-	stepZoomOut()
-	stepZoomOut()
-
+	_layoutZoomMode=true
+	camera.zoom.x=float(1920)/level.layout.boundsDim.x
+	camera.zoom.y=camera.zoom.x
+	position=level.layout.boundsCenter
 func setZoomT(newT : float, instant : bool = false):
 	newT=MathS.Clamp01(newT)
 	_zoomT=newT
@@ -33,13 +31,18 @@ var mousePosPrev : Vector2
 var mouseDelta : Vector2
 func _process(delta):
 	mouseDelta=mousePosPrev-get_local_mouse_position()
+	var targetZoom
 	
-	var target=lerp(minZoom,maxZoom,pow(_zoomT,zoomPow))
+	if not _layoutZoomMode:
+		targetZoom=lerp(minZoom,maxZoom,pow(_zoomT,zoomPow))
+	else:
+		targetZoom=float(1920)/level.layout.boundsDim.x
+		targetPosition=level.layout.boundsCenter
 
-	if camera.zoom.x!=target:
-		camera.zoom.x+=(target-camera.zoom.x)*delta*speedZoom
-		if abs(camera.zoom.x-target)<0.002:
-			camera.zoom.x=target
+	if camera.zoom.x!=targetZoom:
+		camera.zoom.x+=(targetZoom-camera.zoom.x)*delta*speedZoom
+		if abs(camera.zoom.x-targetZoom)<0.002:
+			camera.zoom.x=targetZoom
 		camera.zoom.y=camera.zoom.x
 
 	var targetRel : Vector2
@@ -58,16 +61,19 @@ func _process(delta):
 		position+=relativeTo.position-relativeToPosPrev
 		relativeToPosPrev=relativeTo.position
 
+var _layoutZoomMode : bool
 
 func stepZoomIn():
 	setZoomT(_zoomT+stepZoom)
 func stepZoomOut():
 	setZoomT(_zoomT-stepZoom)
-func fullZoomIn():
+func zoomInMin():
 	setZoomT(maxZoom)
-func fullZoomOut():
+func zoomOutMax():
 	setZoomT(minZoom)
-
+func zoomFullLayout():
+	relativeTo=null
+	_layoutZoomMode=true
 
 func executePanMovement():
 	targetPosition+=mouseDelta
@@ -82,6 +88,8 @@ func distanceToTarget():
 var relativeTo : Node2D
 var relativeToPosPrev : Vector2
 func moveRelativeTo(_relativeTo : Node2D):
+	if _layoutZoomMode:
+		_layoutZoomMode=false
 	relativeTo=_relativeTo
 	if relativeTo!=null:
 		relativeToPosPrev=relativeTo.position

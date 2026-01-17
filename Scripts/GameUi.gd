@@ -14,6 +14,7 @@ var posVelocity : Vector2
 
 @export var inputGuideLeft : InputGuide
 @export var inputGuideRight : InputGuide
+@export var speedIcon : SmoothModulate
 
 func _process(delta):
 	var zoomOffset : float = zoom-cam.camera.zoom.x
@@ -28,3 +29,8 @@ func _process(delta):
 func updateInputText(textLeft : String, textRight : String):
 	inputGuideLeft.update(textLeft)
 	inputGuideRight.update(textRight)
+func updateSpeedIcon(on : bool):
+	if on:
+		speedIcon.TriggerToA()
+	else:
+		speedIcon.TriggerToB()

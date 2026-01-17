@@ -16,7 +16,7 @@ signal EV_ProjectileRemoved
 
 @export var game : Game
 
-var layout : Node2D
+var layout : Layout
 
 var planets : Array[Planet]
 var trees : Array[FruitTree]
@@ -36,7 +36,7 @@ const packedProjectilePathPath : String = "res://Scenes/ProjectileTrail.tscn"
 func _enter_tree():
 	layout=Persistent.layoutPacked.instantiate()
 	add_child(layout)
-	for n : Node2D in layout.get_children():
+	for n in layout.get_children():
 		if n is Planet:
 			planets.append(n)
 			n.level=self

@@ -16,18 +16,19 @@ var selectedTree : FruitTree
 var selectedFruit : Fruit
 var selectedProjectile : Projectile
 var selectedPlanet : Planet
-@export var stateReturnThreshold : float
+
+@export var tapThreshold : float
+@export var heldThreshold : float
 
 var selectedTreeFruitsRemaining : int
 
-
-@export var aimDistanceLimit : float
 var aimVec : Vector2
 var aimDir : Vector2
 var savedZoom : float
 
 @export var packedAimVisuals : PackedScene
 var aimVisualsInstance : Node2D
+var aimCamTarget : Vector2
 
 @export var packedTreePlaceVisuals : PackedScene
 var treePlaceVisualsInstance : TreePlaceVisuals
@@ -67,7 +68,9 @@ func _process(delta: float):
 			targetTimeScale=2.0
 		if Input.is_action_pressed("Retry"):
 			Persistent.TransitionGame()
-	Engine.time_scale=targetTimeScale
+	if targetTimeScale!=Engine.time_scale:
+		Engine.time_scale=targetTimeScale
+		gameUi.updateSpeedIcon(targetTimeScale>1)
 	Engine.physics_ticks_per_second=ceili(60*targetTimeScale)
 	_stateT+=delta
 	var scrollZoomBlocked=false
@@ -78,46 +81,37 @@ func _process(delta: float):
 			if Input.is_action_just_pressed("Main"):
 				if level.fruitsOfTree(selectedTree).size()!=0:
 					setGameState(GameState.Aim)
-			elif Input.is_action_just_released("Secondary"):
-				if secondaryHeldTime<stateReturnThreshold:
-					if cam.relativeTo==null:
-						cam.targetPosition=selectedTree.position
-						cam.moveRelativeTo(level.planetOfTree(selectedTree))
-					else:
-						cam.targetPosition=cam.position
-						cam.moveRelativeTo(null)
 			elif Input.is_action_pressed("Secondary"):
-				cam.executePanMovement()
-			
-			var messageRight : String = ""
-			if cam.relativeTo==null:
-				messageRight+="TAP: FOLLOW PLANET"
-			else:
-				messageRight+="TAP: END FOLLOW"
-			messageRight+="\nHOLD: PAN CAMERA"
-			gameUi.updateInputText("AIM FRUIT",messageRight)
+				if secondaryHeldTime>=heldThreshold:
+					Persistent.TransitionGame()
+			gameUi.updateInputText("AIM FRUIT","HOLD: RESET")
 		GameState.Aim:
 			if Input.is_action_just_pressed("FruitSelect"):
 				cycleSelectedFruit()
 			aimVec = (get_global_mouse_position()-selectedFruit.global_position)
 			aimDir=aimVec.normalized()
 			aimVisualsInstance.update(aimVec)
-			if Input.is_action_pressed("Secondary"):
-				cam.executePanMovement()
-			else:
-				cam.targetPosition=selectedFruit.global_position-level.planetOfTree(selectedTree).global_position
-			if Input.is_action_just_released("Secondary"):
-				if secondaryHeldTime<stateReturnThreshold:
-					setGameState(GameState.View)
-			elif Input.is_action_just_pressed("Main"):
-				level.spawnProjectile(selectedFruit, selectedFruit.global_position,aimDir)
 			
-			gameUi.updateInputText("SHOOT!","TAP: VIEW MAP\nHOLD: PAN CAMERA")
+			var camCentered : bool = cam.targetPosition.distance_to(aimCamTarget)<20
+			if Input.is_action_just_pressed("Main"):
+				level.spawnProjectile(selectedFruit, selectedFruit.global_position,aimDir)
+			elif Input.is_action_pressed("Secondary"):
+				cam.executePanMovement()
+			elif Input.is_action_just_released("Secondary"):
+				if secondaryHeldTime<tapThreshold:
+					if camCentered:
+						setGameState(GameState.View)
+					else:
+						cam.targetPosition=aimCamTarget
+			
+			
+			var messageRight : String = "VIEW MAP" if camCentered else "CENTER"
+			gameUi.updateInputText("SHOOT!","TAP: "+messageRight+"\nHOLD: PAN CAMERA")
 		GameState.Track:
 			if subStateIndex==0: #flying
 				level.testLog.display("ProjVel", int(selectedProjectile.linear_velocity.length()))
 				if Input.is_action_just_released("Secondary"):
-					if secondaryHeldTime<stateReturnThreshold:
+					if secondaryHeldTime<tapThreshold:
 						level.removeProjectile(selectedProjectile,true)
 				
 				gameUi.updateInputText("", "DISCARD")
@@ -131,9 +125,9 @@ func _process(delta: float):
 					if level.getOccupationP()==1:
 						setGameState(GameState.GameOver)
 					else:
-						setGameState(GameState.View)
+						setGameState(GameState.Aim)
 				elif Input.is_action_just_released("Secondary"):
-					if secondaryHeldTime<stateReturnThreshold:
+					if secondaryHeldTime<tapThreshold:
 						if selectedTreeFruitsRemaining>0:
 							treePlaceVisualsInstance.destroy()
 							treePlaceVisualsInstance=null
@@ -178,7 +172,7 @@ func setGameState(newState : GameState):
 		GameState.View:
 			if selectedFruit!=null:
 				updateFruit(selectedFruit)
-			cam.moveRelativeTo(level.planetOfTree(selectedTree))
+			cam.zoomFullLayout()
 		GameState.Aim:
 			if selectedFruit==null:
 				cycleSelectedFruit()
@@ -189,16 +183,13 @@ func setGameState(newState : GameState):
 			cam.targetPosition=Vector2.ZERO
 			cam.moveRelativeTo(selectedProjectile)
 		GameState.GameOver:
-			pass
+			cam.zoomFullLayout()
 	updateAimVisuals()
 
 func onLevelSetup():
 	level.spawnTree(packedTree, level.planets[0], Vector2.ZERO+level.planets[0].radius*Vector2.UP,0)
 	setGameState(GameState.View)
 
-func onFruitTreeReady(fruitTree:FruitTree):
-	selectedTreeFruitsRemaining=selectedTree.spawnPoints.get_child_count()
-	updateFruit(level.fruitsOfTree(selectedTree)[0])
 
 func onTreeSpawned(tree : FruitTree):
 	if selectedTree!=tree:
@@ -206,7 +197,9 @@ func onTreeSpawned(tree : FruitTree):
 		for f : Fruit in dropFruits:
 			level.removeFruit(f)
 	selectedTree=tree
-	tree.EV_FruitTreeReady.connect(onFruitTreeReady)
+	selectedTreeFruitsRemaining=selectedTree.spawnPoints.get_child_count()
+	updateFruit(level.fruitsOfTree(selectedTree)[0])
+
 func onFruitSpawned(fruit : Fruit):
 	pass
 func onFruitRemoved(fruit : Fruit):
@@ -224,7 +217,7 @@ func onProjectileRemoved(projectile:Projectile,destroyed:bool,other:Node2D):
 		if remainingFruits.size()==0:
 			setGameState(GameState.GameOver)
 		else:
-			setGameState(GameState.View)
+			setGameState(GameState.Aim)
 	else: #hit planet
 		selectedPlanet=other
 		cam.relativeTo=selectedPlanet
@@ -235,8 +228,10 @@ func onProjectileRemoved(projectile:Projectile,destroyed:bool,other:Node2D):
 		selectedPlanet.add_child(treePlaceVisualsInstance)
 
 func updateFruit(_selectedFruit : Fruit):
+	var preservedPanOffset : Vector2 = Vector2.ZERO
 	if selectedFruit!=null and selectedFruit!=_selectedFruit:
 		selectedFruit.setFruitState(Fruit.FruitState.Normal)
+		preservedPanOffset=cam.targetPosition-aimCamTarget
 	selectedFruit=_selectedFruit
 	var state : Fruit.FruitState
 	if gameState==GameState.Aim:
@@ -244,6 +239,8 @@ func updateFruit(_selectedFruit : Fruit):
 	else:
 		state=Fruit.FruitState.Selected
 	selectedFruit.setFruitState(state)
+	aimCamTarget=selectedFruit.global_position-level.planetOfTree(selectedTree).global_position
+	cam.targetPosition=aimCamTarget+preservedPanOffset
 func updateAimVisuals():
 	if aimVisualsInstance==null:
 		if selectedFruit!=null:

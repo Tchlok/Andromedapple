@@ -26,7 +26,8 @@ position = Vector2(91, -146)
 
 [node name="SmoothToggle" type="Node2D" parent="."]
 script = ExtResource("3_4ff7j")
-speedIn = 10.0
+_startMode = 1
+speedIn = 6.0
 _easeIn = 1
 metadata/_custom_type_script = "uid://2jrrh6gpg23n"
 

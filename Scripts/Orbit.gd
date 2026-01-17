@@ -9,6 +9,7 @@ var cycleT : float
 @export var satellites : Array[Node2D]
 var satelliteOffsets : Array[Vector2]
 
+
 func _enter_tree():
 	var temp : Array[Node2D] = satellites.duplicate()
 	satellites.clear()

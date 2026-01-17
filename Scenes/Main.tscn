@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b44qd16p07vcq"]
+[gd_scene load_steps=12 format=3 uid="uid://b44qd16p07vcq"]
 
 [ext_resource type="Script" uid="uid://dijj1sm15hano" path="res://Scripts/Game.gd" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://bj1gbp4tnts84" path="res://Scenes/FruitTree.tscn" id="2_pbw6q"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://cs6vvgwd0e0ot" path="res://Scripts/TestLog.gd" id="6_v1gob"]
 [ext_resource type="PackedScene" uid="uid://cxlscnfmux7n0" path="res://Scenes/InputGuide.tscn" id="7_vy5pj"]
 [ext_resource type="Script" uid="uid://bia7cibytvky8" path="res://Scripts/GameUi.gd" id="8_50glp"]
+[ext_resource type="Script" uid="uid://lbjv0cttoeh" path="res://TAOFUS/SmoothModulate.gd" id="8_bmxlf"]
+[ext_resource type="Texture2D" uid="uid://k3hgmr5i4af8" path="res://Sprites/Tex_Rect.png" id="9_4kpch"]
 
 [node name="Main" type="Node2D"]
 
@@ -18,8 +20,8 @@ script = ExtResource("1_r150o")
 level = NodePath("../Level")
 cam = NodePath("../Cam")
 packedTree = ExtResource("2_pbw6q")
-stateReturnThreshold = 0.2
-aimDistanceLimit = 1500.0
+tapThreshold = 0.15
+heldThreshold = 0.6
 packedAimVisuals = ExtResource("3_jw32o")
 packedTreePlaceVisuals = ExtResource("4_50glp")
 gameUi = NodePath("../Level/GameUi")
@@ -36,7 +38,7 @@ holderProjectile = NodePath("HolderProjectile")
 
 [node name="HolderProjectile" type="Node2D" parent="Level"]
 
-[node name="GameUi" type="Control" parent="Level" node_paths=PackedStringArray("cam", "testLog", "inputGuideLeft", "inputGuideRight")]
+[node name="GameUi" type="Control" parent="Level" node_paths=PackedStringArray("cam", "testLog", "inputGuideLeft", "inputGuideRight", "speedIcon")]
 z_index = 200
 layout_mode = 3
 anchors_preset = 15
@@ -53,12 +55,26 @@ posSpringDamp = 0.3
 posSpringRigidity = 6.0
 inputGuideLeft = NodePath("InputGuideLeft")
 inputGuideRight = NodePath("InputGuideRight")
+speedIcon = NodePath("SpeedUpIcon")
 
 [node name="InputGuideLeft" parent="Level/GameUi" instance=ExtResource("7_vy5pj")]
 position = Vector2(-560, 394)
 
 [node name="InputGuideRight" parent="Level/GameUi" instance=ExtResource("7_vy5pj")]
 position = Vector2(560, 394)
+
+[node name="SpeedUpIcon" type="Node2D" parent="Level/GameUi"]
+position = Vector2(-822, -421)
+script = ExtResource("8_bmxlf")
+startMode = 1
+speedAtoB = 5.0
+speedBtoA = 15.0
+easeBtoA = 3
+metadata/_custom_type_script = "uid://lbjv0cttoeh"
+
+[node name="Sprite2D" type="Sprite2D" parent="Level/GameUi/SpeedUpIcon"]
+position = Vector2(-3, -2)
+texture = ExtResource("9_4kpch")
 
 [node name="Cam" type="Node2D" parent="." node_paths=PackedStringArray("game", "level", "camera")]
 script = ExtResource("5_pbw6q")

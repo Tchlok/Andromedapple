@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://gv70gjvlkr3"]
+[gd_scene load_steps=5 format=3 uid="uid://gv70gjvlkr3"]
 
 [ext_resource type="PackedScene" uid="uid://cadkk3oc7vvwk" path="res://Scenes/LevelComponents/Planet.tscn" id="1_gqnhn"]
+[ext_resource type="Script" uid="uid://c8c7hb5aaqtru" path="res://Scripts/Layout.gd" id="1_jsi4j"]
 [ext_resource type="PackedScene" uid="uid://bl6s2d2ov8no3" path="res://Scenes/LevelComponents/Asteroid/Asteroid.tscn" id="2_4kwm8"]
 [ext_resource type="Script" uid="uid://cdeael837cko" path="res://Scripts/Orbit.gd" id="2_jsi4j"]
 
-[node name="Layout5" type="Node2D"]
+[node name="Layout5" type="Node2D" node_paths=PackedStringArray("rect")]
+script = ExtResource("1_jsi4j")
+rect = NodePath("ColorRect")
 
 [node name="Planet" parent="." instance=ExtResource("1_gqnhn")]
 scale = Vector2(5, 5)
@@ -134,3 +137,11 @@ scale = Vector2(2.305, 2.305)
 position = Vector2(-13342.001, 3735.9998)
 rotation = -0.62240326
 scale = Vector2(2.1700003, 2.1700003)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -18009.0
+offset_top = -7130.9995
+offset_right = -16089.0
+offset_bottom = -6050.9995
+scale = Vector2(15.140248, 15.140248)
+color = Color(1, 0, 0, 0.1764706)

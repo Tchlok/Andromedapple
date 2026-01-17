@@ -6,17 +6,12 @@ extends Node2D
 @export var spawnPoints : Node2D
 @export var tog : SmoothToggle
 
+func _enter_tree():
+	pass
+
 func _ready():
 	tog.TriggerOn()
-	tog.EV_ToggleEnd.connect(onToggleEnd)
-
-var level : Level
-
-
-func onToggleEnd(tog, on):
 	for sp : Node2D in spawnPoints.get_children():
 		level.spawnFruit(packedFruit, self, sp.position)
-	EV_FruitTreeReady.emit(self)
-	
 
-signal EV_FruitTreeReady
+var level : Level
