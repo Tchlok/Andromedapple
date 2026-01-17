@@ -131,7 +131,7 @@ func _process(delta: float):
 						if selectedTreeFruitsRemaining>0:
 							treePlaceVisualsInstance.destroy()
 							treePlaceVisualsInstance=null
-							setGameState(GameState.View)
+							setGameState(GameState.Aim)
 						else:
 							print("can't discard")
 				gameUi.updateInputText("PLANT TREE", "DISCARD")
