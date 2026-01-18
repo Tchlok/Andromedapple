@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk1pr857ty6xo"]
+
+[ext_resource type="Script" uid="uid://b4u7maba2usos" path="res://Scripts/MenuLine.gd" id="1_yao8p"]
+
+[sub_resource type="Curve" id="Curve_yao8p"]
+_data = [Vector2(0, 0.853037), 0.0, 0.0, 0, 0, Vector2(1, 0.40616965), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="MenuLine" type="Line2D"]
+points = PackedVector2Array(0, 0, 0, 0)
+width_curve = SubResource("Curve_yao8p")
+script = ExtResource("1_yao8p")
+offset = 100.0

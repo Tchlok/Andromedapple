@@ -22,6 +22,7 @@ ParticleSpawner="*res://TAOFUS/Autoload/ParticleSpawner.gd"
 SoundSpawner="*res://TAOFUS/Autoload/SoundSpawner.gd"
 TransitionManager="*res://TAOFUS/Autoload/TransitionManager.gd"
 Persistent="*res://Scripts/Persistent.gd"
+Save="*res://Scripts/Save.gd"
 
 [display]
 

@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://5ttqy5qjrvfx"]
+
+[ext_resource type="Script" uid="uid://dpndidedp4jo5" path="res://Scripts/MenuLevel.gd" id="1_c8mnq"]
+[ext_resource type="Script" uid="uid://1q3j56yo0nh5" path="res://TAOFUS/VisualEffects/SmoothScale.gd" id="2_wta12"]
+[ext_resource type="Script" uid="uid://lbjv0cttoeh" path="res://TAOFUS/SmoothModulate.gd" id="3_uioow"]
+[ext_resource type="Texture2D" uid="uid://k3hgmr5i4af8" path="res://Sprites/Tex_Rect.png" id="4_y7v45"]
+
+[node name="MenuLevel" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -760.0
+offset_bottom = -340.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c8mnq")
+metadata/_custom_type_script = "uid://dpndidedp4jo5"
+
+[node name="Center" type="Node2D" parent="."]
+
+[node name="SmoothScale" type="Node2D" parent="Center"]
+script = ExtResource("2_wta12")
+startMode = 1
+a = Vector2(0.4, 0.4)
+b = Vector2(0.3, 0.3)
+speedAtoB = 8.0
+speedBtoA = 16.0
+easeAtoB = 3
+metadata/_custom_type_script = "uid://1q3j56yo0nh5"
+
+[node name="SmoothMod" type="Node2D" parent="Center/SmoothScale"]
+script = ExtResource("3_uioow")
+startMode = 1
+a = Color(1, 0.59607846, 1, 1)
+b = Color(1, 1, 1, 1)
+speedAtoB = 8.0
+speedBtoA = 16.0
+easeAtoB = 3
+metadata/_custom_type_script = "uid://lbjv0cttoeh"
+
+[node name="Sprite2D" type="Sprite2D" parent="Center/SmoothScale/SmoothMod"]
+texture = ExtResource("4_y7v45")

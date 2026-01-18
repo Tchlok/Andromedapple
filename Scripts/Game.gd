@@ -123,6 +123,7 @@ func _process(delta: float):
 					treePlaceVisualsInstance.destroy()
 					treePlaceVisualsInstance=null
 					if level.getOccupationP()==1:
+						Persistent.LevelCleared()
 						setGameState(GameState.GameOver)
 					else:
 						setGameState(GameState.Aim)
