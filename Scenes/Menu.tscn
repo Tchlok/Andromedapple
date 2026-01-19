@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cew01kmmnyve5"]
+[gd_scene load_steps=11 format=3 uid="uid://cew01kmmnyve5"]
 
 [ext_resource type="Script" uid="uid://c2o5r133q1hpu" path="res://Scripts/Menu.gd" id="1_3kf3n"]
 [ext_resource type="PackedScene" uid="uid://dk1pr857ty6xo" path="res://Scenes/MenuLine.tscn" id="2_aobxe"]
@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://5ttqy5qjrvfx" path="res://Scenes/MenuLevel.tscn" id="3_syfuq"]
 [ext_resource type="PackedScene" uid="uid://xrng5jub4pqh" path="res://Scenes/Layout/layout1.tscn" id="4_ma218"]
 [ext_resource type="PackedScene" uid="uid://bqt4bnak1eaul" path="res://Scenes/Layout/layout2.tscn" id="5_idohh"]
-[ext_resource type="PackedScene" uid="uid://dcyxih26cjcrh" path="res://Scenes/Layout/layout4.tscn" id="5_wfhf6"]
 [ext_resource type="PackedScene" uid="uid://gv70gjvlkr3" path="res://Scenes/Layout/layout5.tscn" id="6_3jcrr"]
 [ext_resource type="PackedScene" uid="uid://d3f7u04w1r3cb" path="res://Scenes/MenuWorld.tscn" id="7_wfhf6"]
+[ext_resource type="PackedScene" uid="uid://ny3cp514qm1k" path="res://Scenes/Layout/layout6.tscn" id="10_sjh0l"]
+[ext_resource type="PackedScene" uid="uid://2jbtc00iouf8" path="res://Scenes/Layout/layout7.tscn" id="11_qki4b"]
 
 [node name="Menu" type="Node2D" node_paths=PackedStringArray("worldHolder", "controlBlock")]
 script = ExtResource("1_3kf3n")
@@ -24,59 +25,49 @@ controlBlock = NodePath("ControlBlock")
 position = Vector2(-640, -293)
 
 [node name="MenuLevel" parent="WorldHolder/MenuWorld" node_paths=PackedStringArray("unlocks") instance=ExtResource("3_syfuq")]
-offset_left = -214.0
-offset_top = 64.0
-offset_right = -114.0
-offset_bottom = 164.0
+offset_left = 637.0
+offset_top = 289.0
+offset_right = 737.0
+offset_bottom = 389.0
+layout = ExtResource("11_qki4b")
+unlocks = [NodePath("../MenuLevel2")]
+
+[node name="MenuLevel2" parent="WorldHolder/MenuWorld" node_paths=PackedStringArray("unlocks") instance=ExtResource("3_syfuq")]
+offset_left = 711.0
+offset_top = 67.0
+offset_right = 811.0
+offset_bottom = 167.0
+layout = ExtResource("10_sjh0l")
+unlocks = [NodePath("../MenuLevel3"), NodePath("../MenuLevel4")]
+
+[node name="MenuLevel3" parent="WorldHolder/MenuWorld" instance=ExtResource("3_syfuq")]
+offset_left = 684.0
+offset_top = -186.0
+offset_right = 784.0
+offset_bottom = -86.0
 layout = ExtResource("4_ma218")
-unlocks = [NodePath("../MenuLevel2"), NodePath("../MenuLevel3")]
 
-[node name="MenuLevel2" parent="WorldHolder/MenuWorld" instance=ExtResource("3_syfuq")]
-offset_left = 95.0
-offset_top = -194.0
-offset_right = 195.0
-offset_bottom = -94.0
-layout = ExtResource("5_idohh")
-
-[node name="MenuLevel3" parent="WorldHolder/MenuWorld" node_paths=PackedStringArray("unlocks") instance=ExtResource("3_syfuq")]
-offset_left = 218.0
-offset_top = 73.0
-offset_right = 318.0
-offset_bottom = 173.0
+[node name="MenuLevel4" parent="WorldHolder/MenuWorld" node_paths=PackedStringArray("unlocks") instance=ExtResource("3_syfuq")]
+offset_left = 927.0
+offset_top = -76.0
+offset_right = 1027.0
+offset_bottom = 24.0
 layout = ExtResource("2_s2c3o")
-unlocks = [NodePath("../MenuLevel4"), NodePath("../MenuLevel5")]
-
-[node name="MenuLevel4" parent="WorldHolder/MenuWorld" instance=ExtResource("3_syfuq")]
-offset_left = 149.0
-offset_top = 562.0
-offset_right = 249.0
-offset_bottom = 662.0
-layout = ExtResource("5_wfhf6")
+unlocks = [NodePath("../MenuLevel5")]
 
 [node name="MenuLevel5" parent="WorldHolder/MenuWorld" node_paths=PackedStringArray("unlocks") instance=ExtResource("3_syfuq")]
-offset_left = 591.0
-offset_top = 343.0
-offset_right = 691.0
-offset_bottom = 443.0
-layout = ExtResource("6_3jcrr")
-unlocks = [NodePath("../../MenuWorld2/MenuLevel6")]
+offset_left = 1219.0
+offset_top = -40.0
+offset_right = 1319.0
+offset_bottom = 60.0
+layout = ExtResource("5_idohh")
+unlocks = [NodePath("../MenuLevel6")]
 
-[node name="MenuWorld2" parent="WorldHolder" instance=ExtResource("7_wfhf6")]
-position = Vector2(589, -231)
-
-[node name="MenuLevel6" parent="WorldHolder/MenuWorld2" node_paths=PackedStringArray("unlocks") instance=ExtResource("3_syfuq")]
-offset_left = -244.0
-offset_top = -140.0
-offset_right = -144.0
-offset_bottom = -40.0
-layout = ExtResource("5_wfhf6")
-unlocks = [NodePath("../MenuLevel7")]
-
-[node name="MenuLevel7" parent="WorldHolder/MenuWorld2" instance=ExtResource("3_syfuq")]
-offset_left = 116.0
-offset_top = -16.0
-offset_right = 216.0
-offset_bottom = 84.0
+[node name="MenuLevel6" parent="WorldHolder/MenuWorld" instance=ExtResource("3_syfuq")]
+offset_left = 1307.0
+offset_top = 280.0
+offset_right = 1407.0
+offset_bottom = 380.0
 layout = ExtResource("6_3jcrr")
 
 [node name="ControlBlock" type="Control" parent="."]
