@@ -7,6 +7,7 @@ var level : Level
 var ignoredOrigin : GravitySource
 
 var initialDirection : Vector2
+@export var boostStrength : float
 @export var initialSpeed : float
 
 var gravitySources : Array[GravitySource]
@@ -51,7 +52,10 @@ var totalGravStep : Vector2
 
 func freezeP():
 	return MathS.Clamp01(_freezeT/timeToFreeze)
-
+func resetFreeze():
+	_freezeT=0
+func boost():
+	linear_velocity+=linear_velocity.normalized()*boostStrength
 func _physics_process(delta):
 	linear_velocity+=totalGravStep
 	_freezeT+=delta

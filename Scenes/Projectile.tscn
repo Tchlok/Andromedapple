@@ -12,6 +12,7 @@ gravity_scale = 0.0
 linear_damp_mode = 1
 angular_damp_mode = 1
 script = ExtResource("1_k1cl8")
+boostStrength = 750.0
 initialSpeed = 2500.0
 timeToFreeze = 1.5
 colShape = NodePath("CollisionShape2D")
@@ -26,6 +27,7 @@ texture = ExtResource("1_lal66")
 shape = SubResource("CircleShape2D_k1cl8")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

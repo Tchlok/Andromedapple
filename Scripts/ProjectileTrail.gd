@@ -37,6 +37,5 @@ func _physics_process(delta):
 		curPointCd-=delta
 		if curPointCd<=0:
 			curPointCd=timeBetweenPoints
-			print(curPointCd)
 			p.append(projectile.global_position)
 			points=p

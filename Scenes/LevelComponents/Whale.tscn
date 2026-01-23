@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://bcb7mx6bduvo4"]
+
+[ext_resource type="Script" uid="uid://bikrdpkatfhhu" path="res://Scripts/Whale.gd" id="1_gcinb"]
+[ext_resource type="Script" uid="uid://d32ri4dl0odrr" path="res://TAOFUS/VisualEffects/SquashAnchor.gd" id="2_3w2o0"]
+[ext_resource type="Texture2D" uid="uid://k3hgmr5i4af8" path="res://Sprites/Tex_Rect.png" id="2_ffk02"]
+[ext_resource type="Script" uid="uid://3uow3ihp353v" path="res://TAOFUS/VisualEffects/Shaker.gd" id="3_ok1py"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ffk02"]
+radius = 91.01
+
+[node name="Whale" type="Area2D"]
+collision_layer = 0
+input_pickable = false
+linear_damp = 0.0
+angular_damp = 0.0
+script = ExtResource("1_gcinb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ffk02")
+
+[node name="SquashAnchor" type="Node2D" parent="."]
+script = ExtResource("2_3w2o0")
+metadata/_custom_type_script = "uid://d32ri4dl0odrr"
+
+[node name="Shaker" type="Node2D" parent="SquashAnchor"]
+script = ExtResource("3_ok1py")
+metadata/_custom_type_script = "uid://3uow3ihp353v"
+
+[node name="Rot" type="Node2D" parent="SquashAnchor/Shaker"]
+
+[node name="Sprite2D" type="Sprite2D" parent="SquashAnchor/Shaker/Rot"]
+modulate = Color(0.9844155, 0, 0.28253046, 1)
+texture = ExtResource("2_ffk02")

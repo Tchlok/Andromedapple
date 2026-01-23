@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcvunestvmuap"]
+
+[ext_resource type="Script" uid="uid://c8c7hb5aaqtru" path="res://Scripts/Layout.gd" id="1_606uh"]
+[ext_resource type="PackedScene" uid="uid://cadkk3oc7vvwk" path="res://Scenes/LevelComponents/Planet.tscn" id="2_k8k6l"]
+[ext_resource type="PackedScene" uid="uid://qd5ytovhj6af" path="res://Scenes/LevelComponents/Reflector.tscn" id="3_k8k6l"]
+[ext_resource type="PackedScene" uid="uid://bmfrh80s51fly" path="res://Scenes/LevelComponents/Booster.tscn" id="4_dn2ii"]
+[ext_resource type="PackedScene" uid="uid://cp1jkqpjw8wgf" path="res://Scenes/LevelComponents/WhaleBloat.tscn" id="6_n6ebu"]
+
+[node name="Layout7" type="Node2D" node_paths=PackedStringArray("rect")]
+script = ExtResource("1_606uh")
+rect = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -9606.0
+offset_top = -5180.0
+offset_right = -7548.494
+offset_bottom = -4022.653
+scale = Vector2(9.269917, 9.269917)
+color = Color(1, 0, 0, 0.1764706)
+
+[node name="Planet" parent="." instance=ExtResource("2_k8k6l")]
+position = Vector2(-2350, 902)
+
+[node name="Planet2" parent="." instance=ExtResource("2_k8k6l")]
+position = Vector2(1825, -697)
+scale = Vector2(2.9586143, 2.9586143)
+
+[node name="Planet3" parent="." instance=ExtResource("2_k8k6l")]
+position = Vector2(4553, 1559)
+scale = Vector2(2.9586143, 2.9586143)
+
+[node name="Reflector" parent="." instance=ExtResource("3_k8k6l")]
+position = Vector2(-331, 1922)
+
+[node name="Reflector2" parent="." instance=ExtResource("3_k8k6l")]
+position = Vector2(359, 683)
+rotation = 1.5707964
+
+[node name="Booster" parent="." instance=ExtResource("4_dn2ii")]
+position = Vector2(-463, 633)
+
+[node name="Booster2" parent="." instance=ExtResource("4_dn2ii")]
+position = Vector2(-699, 614)
+
+[node name="Booster3" parent="." instance=ExtResource("4_dn2ii")]
+position = Vector2(-936, 639)
+
+[node name="Booster4" parent="." instance=ExtResource("4_dn2ii")]
+position = Vector2(-1173, 641)
+
+[node name="Booster5" parent="." instance=ExtResource("4_dn2ii")]
+position = Vector2(-1433, 636)
+
+[node name="Booster6" parent="." instance=ExtResource("4_dn2ii")]
+position = Vector2(-1686, 638)
+
+[node name="Booster7" parent="." instance=ExtResource("4_dn2ii")]
+position = Vector2(-1917, 636)
+
+[node name="WhaleBloat" parent="." instance=ExtResource("6_n6ebu")]
+position = Vector2(-1961, -489)

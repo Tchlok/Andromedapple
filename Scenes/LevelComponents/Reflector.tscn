@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://qd5ytovhj6af"]
+
+[ext_resource type="Script" uid="uid://d1btj8xdc7c16" path="res://Scripts/Reflector.gd" id="1_nvmca"]
+[ext_resource type="Texture2D" uid="uid://k3hgmr5i4af8" path="res://Sprites/Tex_Rect.png" id="2_0yktn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvmca"]
+size = Vector2(100, 100)
+
+[node name="Reflector" type="Node2D"]
+script = ExtResource("1_nvmca")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_nvmca")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(-500, 0, 500, 0)
+width = 50.63
+
+[node name="Tip0" type="Sprite2D" parent="."]
+position = Vector2(-500, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_0yktn")
+
+[node name="Tip1" type="Sprite2D" parent="."]
+position = Vector2(500, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_0yktn")
