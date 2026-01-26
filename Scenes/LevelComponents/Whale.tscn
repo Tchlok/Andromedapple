@@ -31,3 +31,9 @@ metadata/_custom_type_script = "uid://3uow3ihp353v"
 [node name="Sprite2D" type="Sprite2D" parent="SquashAnchor/Shaker/Rot"]
 modulate = Color(0.9844155, 0, 0.28253046, 1)
 texture = ExtResource("2_ffk02")
+
+[node name="Sprite2D2" type="Sprite2D" parent="SquashAnchor/Shaker/Rot"]
+modulate = Color(0.9844155, 0, 0.28253046, 1)
+position = Vector2(181.00002, -5)
+scale = Vector2(0.5814656, 0.6309006)
+texture = ExtResource("2_ffk02")

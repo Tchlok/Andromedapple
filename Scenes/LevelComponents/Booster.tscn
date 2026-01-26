@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://k3hgmr5i4af8" path="res://Sprites/Tex_Rect.png" id="3_fcbuv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fcbuv"]
-radius = 70.0
+radius = 140.0
 
 [node name="Booster" type="Node2D"]
 script = ExtResource("1_bq6ib")
@@ -26,5 +26,6 @@ _easeOut = 3
 metadata/_custom_type_script = "uid://2jrrh6gpg23n"
 
 [node name="Sprite2D" type="Sprite2D" parent="SmoothToggle"]
-scale = Vector2(0.5, 0.5)
+rotation = 0.7853982
+scale = Vector2(0.855, 0.855)
 texture = ExtResource("3_fcbuv")

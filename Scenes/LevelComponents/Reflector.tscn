@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://k3hgmr5i4af8" path="res://Sprites/Tex_Rect.png" id="2_0yktn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvmca"]
+resource_local_to_scene = true
 size = Vector2(100, 100)
 
 [node name="Reflector" type="Node2D"]

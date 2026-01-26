@@ -1,21 +1,27 @@
 class_name Whale
 extends Area2D
 
-const maxSpeed : float = 900
-const accel : float = 5000
-const decel : float = 2000
+const maxSpeed : float = 3000
+const accelDur : float = 0
+const alertDelay : float = 0
+
+var accelT : float
+
+const fov : float = 90
+const dist : float = 450000
 
 var colShape : CollisionShape2D
 var shape : CircleShape2D
 var squash : SquashAnchor
 var shaker : Shaker
 var rot : Node2D
-var dead : bool
 
 var level : Level
 var proj : Projectile
 
 var velocity : Vector2
+
+var aggro : bool
 
 func _enter_tree():
 	colShape=get_child(0)
@@ -31,12 +37,16 @@ func _enter_tree():
 	area_entered.connect(onAreaEntered)
 	body_entered.connect(onBodyEntered)
 
+	rot.rotation=rotation
+	rotation=0
+
 func _physics_process(delta):
 	if movesToTarget():
-		velocity+=position.direction_to(proj.position)*accel*delta
-		velocity=velocity.limit_length(maxSpeed)
+		accelT+=delta
+		velocity=position.direction_to(proj.position)*maxSpeed*MathS.Clamp01((accelT-alertDelay)/accelDur)
 	else:
-		velocity-=velocity.normalized()*decel*delta
+		accelT=0
+		velocity=Vector2.ZERO
 		if velocity.length()<=20:
 			velocity=Vector2.ZERO
 
@@ -47,10 +57,21 @@ func _physics_process(delta):
 	position+=velocity*delta
 
 func movesToTarget():
-	return proj!=null and not dead and lineOfSight()
+	if proj==null:
+		aggro=false
+		return false
+	var los : bool = lineOfSight()
+	if not los:
+		aggro=false
+	elif not aggro:
+		var angleToProj : float = rad_to_deg(position.direction_to(proj.position).angle_to(rot.transform.x))
+		if abs(angleToProj)<=fov/2 and proj.position.distance_to(position)<=dist:
+			aggro=true
+			print("Whale aggro triggered " + str(abs(angleToProj)) + "  " + str(proj.position.distance_to(position)))
+	return aggro
 
 func lineOfSight():
-	var colMask = 1
+	var colMask = 3
 	var query = PhysicsRayQueryParameters2D.create(position,proj.position,colMask)
 	query.collide_with_areas=true
 	query.collide_with_bodies=false
@@ -59,14 +80,10 @@ func lineOfSight():
 	return result.is_empty()
 
 func onProjectileSpawned(projectile : Projectile):
-	if dead:
-		return
 	proj=projectile
 
 func onProjectileRemoved(projectile : Projectile, destroyed : bool, other : Node2D):
 	proj=null
-	if dead:
-		return
 
 func onAreaEntered(area : Area2D):
 	pass

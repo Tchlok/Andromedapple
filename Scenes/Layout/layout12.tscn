@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=3 uid="uid://biww7jygshcdd"]
+
+[ext_resource type="Script" uid="uid://c8c7hb5aaqtru" path="res://Scripts/Layout.gd" id="1_c81w5"]
+[ext_resource type="PackedScene" uid="uid://cadkk3oc7vvwk" path="res://Scenes/LevelComponents/Planet.tscn" id="2_v58ka"]
+[ext_resource type="Script" uid="uid://cdeael837cko" path="res://Scripts/Orbit.gd" id="3_v5fki"]
+[ext_resource type="PackedScene" uid="uid://qd5ytovhj6af" path="res://Scenes/LevelComponents/Reflector.tscn" id="4_fcq57"]
+[ext_resource type="PackedScene" uid="uid://bcsujg1vnnwgj" path="res://Scenes/LevelComponents/Debree/DebreeRect.tscn" id="5_c81w5"]
+[ext_resource type="PackedScene" uid="uid://bmfrh80s51fly" path="res://Scenes/LevelComponents/Booster.tscn" id="6_v58ka"]
+
+[node name="Layout12" type="Node2D" node_paths=PackedStringArray("rect")]
+script = ExtResource("1_c81w5")
+rect = NodePath("ColorRect")
+metadata/_edit_vertical_guides_ = [-6770.0]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -10717.0
+offset_top = -8081.0005
+offset_right = -8250.91
+offset_bottom = -6693.825
+scale = Vector2(9.269917, 9.269917)
+color = Color(1, 0, 0, 0.1764706)
+
+[node name="Planet" parent="." instance=ExtResource("2_v58ka")]
+scale = Vector2(2, 2)
+
+[node name="Planet2" parent="." instance=ExtResource("2_v58ka")]
+position = Vector2(7035.0005, -2850.0002)
+scale = Vector2(5.771, 5.771)
+
+[node name="Planet3" parent="." instance=ExtResource("2_v58ka")]
+position = Vector2(-6088, -1200)
+scale = Vector2(2.4987152, 2.4987152)
+
+[node name="Planet4" parent="." instance=ExtResource("2_v58ka")]
+position = Vector2(599.5, -6401)
+scale = Vector2(2.75, 2.75)
+
+[node name="Orbit" type="Node2D" parent="." node_paths=PackedStringArray("satellites")]
+script = ExtResource("3_v5fki")
+cycleDuration = 15.0
+satellites = [NodePath("../Reflector"), NodePath("../Reflector4")]
+metadata/_custom_type_script = "uid://cdeael837cko"
+
+[node name="Reflector" parent="." instance=ExtResource("4_fcq57")]
+position = Vector2(9, -1815)
+scale = Vector2(1, 2.994)
+
+[node name="Reflector4" parent="." instance=ExtResource("4_fcq57")]
+position = Vector2(9, 1815)
+scale = Vector2(1, 2.994)
+
+[node name="Reflector2" parent="." instance=ExtResource("4_fcq57")]
+position = Vector2(3493.9998, 1503)
+scale = Vector2(1.162583, 1.1142716)
+
+[node name="Reflector3" parent="." instance=ExtResource("4_fcq57")]
+position = Vector2(7287, -6401)
+rotation = 0.7853982
+scale = Vector2(1.162583, 1.1142716)
+
+[node name="Reflector5" parent="." instance=ExtResource("4_fcq57")]
+position = Vector2(-6174.0005, -6401)
+rotation = 2.3561945
+scale = Vector2(1.162583, 1.1142716)
+
+[node name="Debree" parent="." instance=ExtResource("5_c81w5")]
+position = Vector2(2, -2378)
+scale = Vector2(16.72256, -1.6186886)
+
+[node name="Booster" parent="." instance=ExtResource("6_v58ka")]
+position = Vector2(3943.25, -6401)
+
+[node name="Booster3" parent="." instance=ExtResource("6_v58ka")]
+position = Vector2(-2744.25, -6401)
+
+[node name="Booster4" parent="." instance=ExtResource("6_v58ka")]
+position = Vector2(-1072.375, -6401)
+
+[node name="Booster5" parent="." instance=ExtResource("6_v58ka")]
+position = Vector2(2271.375, -6401)
+
+[node name="Booster6" parent="." instance=ExtResource("6_v58ka")]
+position = Vector2(-6174, -3804)

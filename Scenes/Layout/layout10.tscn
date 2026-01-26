@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://coggj7r50ntu"]
+
+[ext_resource type="Script" uid="uid://c8c7hb5aaqtru" path="res://Scripts/Layout.gd" id="1_5ym8y"]
+[ext_resource type="PackedScene" uid="uid://cadkk3oc7vvwk" path="res://Scenes/LevelComponents/Planet.tscn" id="2_22g0o"]
+[ext_resource type="PackedScene" uid="uid://cp1jkqpjw8wgf" path="res://Scenes/LevelComponents/WhaleBloat.tscn" id="4_h6617"]
+[ext_resource type="Script" uid="uid://cdeael837cko" path="res://Scripts/Orbit.gd" id="5_oks3l"]
+[ext_resource type="PackedScene" uid="uid://bcsujg1vnnwgj" path="res://Scenes/LevelComponents/Debree/DebreeRect.tscn" id="6_oks3l"]
+
+[node name="Layout10" type="Node2D" node_paths=PackedStringArray("rect")]
+script = ExtResource("1_5ym8y")
+rect = NodePath("ColorRect")
+
+[node name="Planet4" parent="." instance=ExtResource("2_22g0o")]
+position = Vector2(-3843, 745)
+scale = Vector2(2, 2)
+
+[node name="Planet5" parent="." instance=ExtResource("2_22g0o")]
+position = Vector2(-3843, -2255)
+scale = Vector2(2, 2)
+
+[node name="Planet6" parent="." instance=ExtResource("2_22g0o")]
+position = Vector2(4748, -758.00006)
+scale = Vector2(3.5760667, 3.5760667)
+
+[node name="Planet8" parent="." instance=ExtResource("2_22g0o")]
+position = Vector2(6759.9995, -748.99994)
+scale = Vector2(1.7360669, 1.7360669)
+
+[node name="Planet7" parent="." instance=ExtResource("2_22g0o")]
+position = Vector2(1729.0001, 3809.0005)
+scale = Vector2(4.0906096, 4.0906096)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -9606.0
+offset_top = -5180.0
+offset_right = -7548.494
+offset_bottom = -4022.653
+scale = Vector2(9.269917, 9.269917)
+color = Color(1, 0, 0, 0.1764706)
+
+[node name="Orbit" type="Node2D" parent="." node_paths=PackedStringArray("satellites")]
+position = Vector2(-3843, -755)
+script = ExtResource("5_oks3l")
+satellites = [NodePath("../Planet4"), NodePath("../Planet5")]
+metadata/_custom_type_script = "uid://cdeael837cko"
+
+[node name="Debree" parent="." instance=ExtResource("6_oks3l")]
+position = Vector2(-3804, -3078)
+rotation = 0.045660995
+scale = Vector2(6.9858522, 1.3509816)
+
+[node name="Debree2" parent="." instance=ExtResource("6_oks3l")]
+position = Vector2(3568, 790.99994)
+rotation = 1.5707964
+scale = Vector2(10.456302, 1.2963592)
+
+[node name="Debree3" parent="." instance=ExtResource("6_oks3l")]
+position = Vector2(3312, 1776)
+rotation = 2.8613477
+scale = Vector2(8.468158, 1.245813)
+
+[node name="Debree4" parent="." instance=ExtResource("6_oks3l")]
+position = Vector2(-368.00006, 2415.9998)
+rotation = 2.3527293
+scale = Vector2(9.109642, 0.8170629)
+
+[node name="WhaleBloat" parent="." instance=ExtResource("4_h6617")]
+position = Vector2(-3860, -3966)
+
+[node name="WhaleBloat2" parent="." instance=ExtResource("4_h6617")]
+position = Vector2(6057.9995, -146.99988)
+rotation = 2.157447

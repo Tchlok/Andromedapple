@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://xb481qon6ajq"]
+
+[ext_resource type="Script" uid="uid://c8c7hb5aaqtru" path="res://Scripts/Layout.gd" id="1_stfrf"]
+[ext_resource type="PackedScene" uid="uid://cadkk3oc7vvwk" path="res://Scenes/LevelComponents/Planet.tscn" id="2_fxqfy"]
+[ext_resource type="PackedScene" uid="uid://bcsujg1vnnwgj" path="res://Scenes/LevelComponents/Debree/DebreeRect.tscn" id="3_fxqfy"]
+[ext_resource type="PackedScene" uid="uid://cp1jkqpjw8wgf" path="res://Scenes/LevelComponents/WhaleBloat.tscn" id="4_74763"]
+
+[node name="Layout11" type="Node2D" node_paths=PackedStringArray("rect")]
+script = ExtResource("1_stfrf")
+rect = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -8601.001
+offset_top = -5180.0005
+offset_right = -6703.5366
+offset_bottom = -4112.6772
+scale = Vector2(9.269917, 9.269917)
+color = Color(1, 0, 0, 0.1764706)
+
+[node name="Planet" parent="." instance=ExtResource("2_fxqfy")]
+position = Vector2(-4699, 254)
+scale = Vector2(2, 2)
+
+[node name="Debree" parent="." instance=ExtResource("3_fxqfy")]
+position = Vector2(-3161, 556)
+scale = Vector2(1.6830595, 10.676333)
+
+[node name="Debree2" parent="." instance=ExtResource("3_fxqfy")]
+position = Vector2(736.00024, 800)
+rotation = 1.5707964
+scale = Vector2(1.6830595, 6.754158)
+
+[node name="Planet2" parent="." instance=ExtResource("2_fxqfy")]
+position = Vector2(735.99976, -392.99997)
+scale = Vector2(3.5, 3.5)
+
+[node name="Planet3" parent="." instance=ExtResource("2_fxqfy")]
+position = Vector2(5040, -357)
+scale = Vector2(2, 2)
+
+[node name="Planet4" parent="." instance=ExtResource("2_fxqfy")]
+position = Vector2(-789.00037, 1795.0001)
+scale = Vector2(2.4673843, 2.4673843)
+
+[node name="WhaleBloat" parent="." instance=ExtResource("4_74763")]
+position = Vector2(-2429, 296)
+rotation = -1.5707964
+
+[node name="WhaleBloat2" parent="." instance=ExtResource("4_74763")]
+position = Vector2(1060, -1124)
+rotation = -5.736897

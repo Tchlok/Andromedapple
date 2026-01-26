@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://k3hgmr5i4af8" path="res://Sprites/Tex_Rect.png" id="4_m8cf4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ffk02"]
-radius = 159.11317
+radius = 117.0
 
 [node name="WhaleBloat" type="Area2D"]
 collision_layer = 0
@@ -30,4 +30,9 @@ metadata/_custom_type_script = "uid://3uow3ihp353v"
 
 [node name="Sprite2D" type="Sprite2D" parent="SquashAnchor/Shaker/Rot"]
 modulate = Color(0.49310315, 0.42514852, 1, 1)
+texture = ExtResource("4_m8cf4")
+
+[node name="Sprite2D2" type="Sprite2D" parent="SquashAnchor/Shaker/Rot/Sprite2D"]
+position = Vector2(181.00002, -5)
+scale = Vector2(0.5814656, 0.6309006)
 texture = ExtResource("4_m8cf4")
