@@ -1,20 +1,81 @@
-[gd_scene load_steps=3 format=3 uid="uid://brddy3bhqtrdo"]
+[gd_scene load_steps=8 format=3 uid="uid://brddy3bhqtrdo"]
 
 [ext_resource type="Script" uid="uid://c8c7hb5aaqtru" path="res://Scripts/Layout.gd" id="1_dmgk0"]
 [ext_resource type="PackedScene" uid="uid://cadkk3oc7vvwk" path="res://Scenes/LevelComponents/Planet.tscn" id="2_vbo3g"]
+[ext_resource type="Script" uid="uid://cdeael837cko" path="res://Scripts/Orbit.gd" id="3_umgq8"]
+[ext_resource type="PackedScene" uid="uid://bmfrh80s51fly" path="res://Scenes/LevelComponents/Booster.tscn" id="3_vbo3g"]
+[ext_resource type="PackedScene" uid="uid://bl6s2d2ov8no3" path="res://Scenes/LevelComponents/Asteroid/Asteroid.tscn" id="5_nm7bq"]
+[ext_resource type="PackedScene" uid="uid://bcsujg1vnnwgj" path="res://Scenes/LevelComponents/Debree/DebreeRect.tscn" id="6_qg2rv"]
+[ext_resource type="PackedScene" uid="uid://qd5ytovhj6af" path="res://Scenes/LevelComponents/Reflector.tscn" id="7_ujbtr"]
 
 [node name="Layout14" type="Node2D" node_paths=PackedStringArray("rect")]
 script = ExtResource("1_dmgk0")
 rect = NodePath("ColorRect")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -9606.0
-offset_top = -5180.0
-offset_right = -7548.494
-offset_bottom = -4022.653
+offset_left = -17020.002
+offset_top = -17718.002
+offset_right = -12325.244
+offset_bottom = -15077.201
 scale = Vector2(9.269917, 9.269917)
 color = Color(1, 0, 0, 0.1764706)
 
+[node name="Booster" parent="." instance=ExtResource("3_vbo3g")]
+position = Vector2(-140, -7000)
+
+[node name="Booster3" parent="." instance=ExtResource("3_vbo3g")]
+position = Vector2(833, -8970)
+
+[node name="Booster4" parent="." instance=ExtResource("3_vbo3g")]
+position = Vector2(1382, -10152)
+
+[node name="Booster2" parent="." instance=ExtResource("3_vbo3g")]
+position = Vector2(6458, 0)
+
+[node name="Orbit" type="Node2D" parent="." node_paths=PackedStringArray("satellites")]
+script = ExtResource("3_umgq8")
+cycleDuration = 15.0
+satellites = [NodePath("../Planet"), NodePath("../Planet3")]
+metadata/_custom_type_script = "uid://cdeael837cko"
+
 [node name="Planet" parent="." instance=ExtResource("2_vbo3g")]
-position = Vector2(-5.925, 0)
-scale = Vector2(5.5833087, 5.5833087)
+position = Vector2(3840, 0)
+scale = Vector2(4, 4)
+
+[node name="Planet3" parent="." instance=ExtResource("2_vbo3g")]
+position = Vector2(-3840, 0)
+scale = Vector2(4, 4)
+
+[node name="Asteroid2" parent="." instance=ExtResource("5_nm7bq")]
+position = Vector2(7134.0005, -12136)
+scale = Vector2(3.9529648, 3.9529648)
+
+[node name="Planet2" parent="." instance=ExtResource("2_vbo3g")]
+position = Vector2(2623, -12452)
+scale = Vector2(6, 6)
+
+[node name="Planet4" parent="." instance=ExtResource("2_vbo3g")]
+position = Vector2(9919.001, -5018)
+scale = Vector2(4.1677237, 4.1677237)
+
+[node name="Planet6" parent="." instance=ExtResource("2_vbo3g")]
+position = Vector2(13409.001, -597)
+scale = Vector2(5.587273, 5.587273)
+
+[node name="Planet5" parent="." instance=ExtResource("2_vbo3g")]
+position = Vector2(9622, -9364)
+scale = Vector2(4.25, 4.25)
+
+[node name="Debree" parent="." instance=ExtResource("6_qg2rv")]
+position = Vector2(9829, -7055.9995)
+rotation = -0.18762827
+scale = Vector2(12.340088, 2.1473694)
+
+[node name="Reflector" parent="." instance=ExtResource("7_ujbtr")]
+position = Vector2(13450, -7344)
+rotation = 1.5707964
+scale = Vector2(2.1881785, 1.1243548)
+
+[node name="Reflector2" parent="." instance=ExtResource("7_ujbtr")]
+position = Vector2(9551, 1390)
+scale = Vector2(1.3478795, 1.1254485)

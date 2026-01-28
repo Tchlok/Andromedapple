@@ -68,6 +68,12 @@ func _process(delta: float):
 			targetTimeScale=2.0
 		if Input.is_action_pressed("Retry"):
 			Persistent.TransitionGame()
+		
+		#TODO remove at some point
+		if Input.is_action_just_pressed("Cheat"):
+			Persistent.LevelCleared()
+			Persistent.TransitionMenu()
+
 	if targetTimeScale!=Engine.time_scale:
 		Engine.time_scale=targetTimeScale
 		gameUi.updateSpeedIcon(targetTimeScale>1)

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://k3hgmr5i4af8" path="res://Sprites/Tex_Rect.png" id="3_fcbuv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fcbuv"]
-radius = 140.0
+radius = 200.0
 
 [node name="Booster" type="Node2D"]
 script = ExtResource("1_bq6ib")

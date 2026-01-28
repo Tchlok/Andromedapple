@@ -16,6 +16,10 @@ func eat(projectile : Projectile):
     bloat()
 
 func onProjectileRemoved(projectile : Projectile, destroyed : bool, other : Node2D):
+    if other == null:
+        return
+    if not destroyed:
+        return
     if position.distance_to(projectile.position)<=removedEatThreshold and aggro:
         bloat()
     proj=null

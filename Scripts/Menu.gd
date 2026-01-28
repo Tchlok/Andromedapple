@@ -22,6 +22,8 @@ func _ready():
 
 	for c : MenuLevel in clearedLevels:
 		for u : MenuLevel in c.unlocks:
+			if u == null:
+				continue
 			if not unlockedLevels.has(u) and not clearedLevels.has(u):
 				unlockedLevels.append(u)
 	for u : MenuLevel in unlockedLevels:
@@ -32,6 +34,8 @@ func _ready():
 	var line : MenuLine
 	for c : MenuLevel in clearedLevels:
 		for u : MenuLevel in c.unlocks:
+			if u == null:
+				continue
 			if u.cord.x!=c.cord.x: # different worlds
 				continue
 			line=linePacked.instantiate()
